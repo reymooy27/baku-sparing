@@ -10,10 +10,6 @@ export default function Home() {
       fetch("http://localhost:3000/api/hello").then((res) => res.json()),
   });
 
-  if (error) {
-    return <div>{JSON.stringify(error)}</div>;
-  }
-
   return (
     <>
       {isPending && <p>Loading...</p>}

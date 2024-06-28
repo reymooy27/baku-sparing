@@ -23,7 +23,7 @@ export default function Home() {
     <>
       {isPending && <p>Loading...</p>}
       {!isPending && (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <main className="flex min-h-screen mx-[8em] border-black border flex-col items-center justify-between p-24">
           <h1>Baku Sparing</h1>
           <h1>{JSON.stringify(data)}</h1>
           {session?.status === "authenticated" ? (

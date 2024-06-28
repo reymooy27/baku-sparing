@@ -55,7 +55,7 @@ model Account {
 }
 
 model Session {
-  id           String @id @default(cuid())
+  id           Int    @id @default(autoincrement())
   sessionToken String @unique
   userId       Int
 
@@ -95,4 +95,9 @@ model Authenticator {
 model Team {
   id   Int     @id @default(autoincrement())
   name String?
+}
+
+model Sparing {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
 }

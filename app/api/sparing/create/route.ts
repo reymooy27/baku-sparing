@@ -5,9 +5,14 @@ export const POST = auth(async (req) => {
   const session = req.auth;
 
   if (!session) {
-    return Response.json({
-      message: "Not Authenticated",
-    });
+    return Response.json(
+      {
+        message: "Not Authenticated",
+      },
+      {
+        status: 401,
+      },
+    );
   }
 
   const { name } = await req.json();
@@ -22,10 +27,12 @@ export const POST = auth(async (req) => {
       message: "Succesfully create data",
     });
   } catch (error) {
-    console.log(error);
-    return Response.json({
-      success: false,
-      message: "Cannot create data",
-    });
+    return Response.json(
+      {
+        success: false,
+        message: "Cannot create data",
+      },
+      { status: 500 },
+    );
   }
 });

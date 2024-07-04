@@ -1,9 +1,16 @@
 "use client";
 
+import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
+export type SparingData = {
+  name: string;
+  id: number;
+};
 
 export default function Home() {
   const router = useRouter();
@@ -22,11 +29,26 @@ export default function Home() {
   return (
     <>
       <div className="w-full min-h-screen flex">
-        <div className="w-[20%] bg-red-300"></div>
-        <main className="w-[80%] flex flex-col items-center justify-between">
-          <header className="bg-yellow-300 w-full h-[3rem]"></header>
+        <div className="w-[250px] bg-red-300"></div>
+        <main className="w-[calc(100%-250px)]">
+          <Header />
           <h1>Baku Sparing</h1>
-          {isPending ? <h1>Loading...</h1> : <h1>{JSON.stringify(data)}</h1>}
+          <div className="my-0 mx-[3rem] flex flex-col justify-center gap-5 p-5 ">
+            <CardHeader>
+              <CardTitle>Data</CardTitle>
+            </CardHeader>
+            <CardContent className="flex gap-3">
+              {isPending ? (
+                <h1>Loading...</h1>
+              ) : (
+                data.map((data: SparingData) => (
+                  <Card key={data.id} className="w-[300px] h-[200px]">
+                    <span>{data.id}</span>
+                  </Card>
+                ))
+              )}
+            </CardContent>
+          </div>
           {session?.status === "authenticated" ? (
             <>
               <span>{session?.data?.user?.name}</span>

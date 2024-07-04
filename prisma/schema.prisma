@@ -100,4 +100,5 @@ model Team {
 model Sparing {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
+  name      String
 }

@@ -28,37 +28,33 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-full min-h-screen flex">
-        <div className="w-[250px] bg-red-300"></div>
-        <main className="w-[calc(100%-250px)]">
-          <Header />
-          <h1>Baku Sparing</h1>
-          <div className="my-0 mx-[3rem] flex flex-col justify-center gap-5 p-5 ">
-            <CardHeader>
-              <CardTitle>Data</CardTitle>
-            </CardHeader>
-            <CardContent className="flex gap-3">
-              {isPending ? (
-                <h1>Loading...</h1>
-              ) : (
-                data.map((data: SparingData) => (
-                  <Card key={data.id} className="w-[300px] h-[200px]">
-                    <span>{data.id}</span>
-                  </Card>
-                ))
-              )}
-            </CardContent>
+      <h1>Baku Sparing</h1>
+      <div className="my-0 mx-[1rem] flex gap-5 p-5 ">
+        {isPending ? (
+          <div className="flex justify-center items-center w-full min-h-[200px]">
+            <h1>Loading...</h1>
           </div>
-          {session?.status === "authenticated" ? (
-            <>
-              <span>{session?.data?.user?.name}</span>
-              <Button onClick={handleSignOut}>Sign Out</Button>
-            </>
-          ) : (
-            <Button onClick={() => router.push("login")}>Clic</Button>
-          )}
-        </main>
+        ) : (
+          data.map((data: SparingData) => (
+            <Card
+              key={data.id}
+              className="w-[300px] h-[200px] bg-secondary border-none shadow-xl p-3"
+            >
+              <span>{data.id}</span>
+            </Card>
+          ))
+        )}
       </div>
+      {session?.status === "authenticated" ? (
+        <>
+          <span>{session?.data?.user?.name}</span>
+          <Button onClick={handleSignOut}>Sign Out</Button>
+        </>
+      ) : (
+        <Button className="bg-red-400" onClick={() => router.push("login")}>
+          Clic
+        </Button>
+      )}
     </>
   );
 }
